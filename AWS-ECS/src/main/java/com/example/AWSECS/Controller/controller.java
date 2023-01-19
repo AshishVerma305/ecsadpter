@@ -37,11 +37,12 @@ public class controller {
             AmazonEC2 amazonEC2 = AmazonEC2ClientBuilder.standard().withRegion(Regions.US_EAST_1)
                     .build();
             String instanceId="i-01617add322847a93";
-            StartInstancesRequest startInstancesRequest = new StartInstancesRequest()
-                    .withInstanceIds(instanceId);
-            amazonEC2.startInstances(startInstancesRequest);
-            System.out.println("Connected");
+            DescribeInstancesRequest describeInstancesRequest =new DescribeInstancesRequest().withInstanceIds(instanceId);
 
+            amazonEC2.describeInstances(describeInstancesRequest);
+            System.out.println(amazonEC2.describeInstances(describeInstancesRequest));
+            System.out.println("Connected");
+            
         }catch (Exception e)
         {
             System.out.println(e);
