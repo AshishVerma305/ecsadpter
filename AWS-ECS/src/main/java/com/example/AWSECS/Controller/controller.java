@@ -12,6 +12,7 @@ import com.amazonaws.services.ec2.AmazonEC2ClientBuilder;
 import com.amazonaws.services.ec2.model.StartInstancesRequest;
 import com.amazonaws.services.ec2instanceconnect.AWSEC2InstanceConnectClient;
 import com.amazonaws.services.ecs.AmazonECS;
+import com.amazonaws.services.ec2.model.DescribeInstancesRequest;
 
 import com.amazonaws.services.ecs.AmazonECSClientBuilder;
 
