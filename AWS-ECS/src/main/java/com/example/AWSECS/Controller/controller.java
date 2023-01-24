@@ -38,11 +38,24 @@ public class controller {
             AmazonEC2 amazonEC2 = AmazonEC2ClientBuilder.standard().withRegion(Regions.US_EAST_1)
                     .build();
             String instanceId="i-01617add322847a93";
-            DescribeInstancesRequest describeInstancesRequest =new DescribeInstancesRequest().withInstanceIds(instanceId);
-
-            amazonEC2.describeInstances(describeInstancesRequest);
-            System.out.println(amazonEC2.describeInstances(describeInstancesRequest));
-            System.out.println("Connected");
+            Matcher matcher=new Matcher();
+            matcher.setHttpCode("404");
+            CreateTargetGroupRequest createTargetGroupRequest = new CreateTargetGroupRequest();
+            createTargetGroupRequest.setName("chaos-tg-8083");
+            createTargetGroupRequest.setProtocol(ProtocolEnum.HTTPS);
+            createTargetGroupRequest.setPort(8083);
+            createTargetGroupRequest.setTargetType(TargetTypeEnum.Ip);
+            createTargetGroupRequest.setVpcId("vpc-06c677ddaf72b471b");
+            createTargetGroupRequest.setHealthCheckIntervalSeconds(30);
+            createTargetGroupRequest.setHealthCheckTimeoutSeconds(5);
+            createTargetGroupRequest.setUnhealthyThresholdCount(2);
+            createTargetGroupRequest.setHealthyThresholdCount(5);
+            createTargetGroupRequest.setHealthCheckPath("/");
+            createTargetGroupRequest.setIpAddressType(TargetGroupIpAddressTypeEnum.Ipv4);
+            createTargetGroupRequest.setMatcher(matcher);
+            createTargetGroupRequest.setHealthCheckPort("8083");
+            System.out.println(createTargetGroupRequest);
+            System.out.println("Created");
             
         }catch (Exception e)
         {
